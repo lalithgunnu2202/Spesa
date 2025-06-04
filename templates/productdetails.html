@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPESA - Product Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --medium-gray: #666;
+            --text-light: #888;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--secondary-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .header-icons i {
+            font-size: 20px;
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .header-icons i:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Product Details */
+        .product-details {
+            background-color: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .product-details:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: var(--medium-gray);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .designer {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .social-stats {
+            display: flex;
+            gap: 20px;
+            color: var(--medium-gray);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .stat:hover {
+            color: var(--primary-color);
+        }
+        
+        .stat i {
+            font-size: 16px;
+        }
+        
+        /* Size Selection */
+        .size-selection {
+            margin-bottom: 20px;
+        }
+        
+        .size-selection label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .size-btn {
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            background-color: var(--white);
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .size-btn:hover, .size-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        /* Product Actions */
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            flex: 1;
+        }
+        
+        .btn-buy {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-buy:hover {
+            background-color: #e84118;
+            transform: translateY(-2px);
+        }
+        
+        .btn-cart {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-cart:hover {
+            background-color: #1e272e;
+            transform: translateY(-2px);
+        }
+        
+        .btn-wishlist {
+            background-color: var(--light-gray);
+            color: var(--secondary-color);
+        }
+        
+        .btn-wishlist:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Related Products */
+        .section-title {
+            font-size: 20px;
+            margin: 30px 0 20px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .product-mini-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .product-mini-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-mini-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .product-mini-info {
+            padding: 12px;
+        }
+        
+        .product-mini-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .product-mini-price {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .product-mini-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-mini {
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            flex: 1;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .product-image-container {
+                height: 500px;
+            }
+            
+            .product-title {
+                font-size: 28px;
+            }
+            
+            .product-price {
+                font-size: 22px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .product-details, .section-title, .product-mini-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .product-details { animation-delay: 0.1s; }
+        .section-title { animation-delay: 0.2s; }
+        .product-mini-card { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">SPE<span>SA</span></div>
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">3</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Product Details -->
+        <div class="product-details">
+            <span class="product-badge">New</span>
+            <div class="product-image-container">
+                <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Premium Streetwear" class="product-image">
+            </div>
+            <div class="product-info">
+                <h2 class="product-title">Premium Streetwear Hoodie</h2>
+                <div class="product-price">$79.99</div>
+                <p class="product-description">
+                    Elevate your street style with this premium hoodie, crafted from high-quality cotton blend for ultimate comfort and durability. Features bold graphic prints and a relaxed fit, perfect for urban adventures.
+                </p>
+                <span class="designer">By edesign_pro</span>
+                <div class="social-stats">
+                    <div class="stat">
+                        <i class="far fa-heart"></i>
+                        <span>120 likes</span>
+                    </div>
+                    <div class="stat">
+                        <i class="far fa-comment"></i>
+                        <span>20 comments</span>
+                    </div>
+                </div>
+                <div class="size-selection">
+                    <label>Select Size</label>
+                    <div class="size-options">
+                        <button class="size-btn">S</button>
+                        <button class="size-btn active">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                </div>
+                <div class="product-actions">
+                    <button class="btn btn-buy">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                    <button class="btn btn-cart">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-wishlist">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        <h3 class="section-title">Related Products</h3>
+        <div class="products-grid">
+            <div class="product-mini-card">
+                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Urban Tee" class="product-mini-image">
+                <div class="product-mini-info">
+                    <div class="product-mini-title">Urban Graphic Tee</div>
+                    <div class="product-mini-price">$39.99</div>
+                    <div class="product-mini-actions">
+                        <button class="btn btn-mini btn-buy">Buy Now</button>
+                        <button class="btn btn-mini btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-mini-card">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Cargo Pants" class="product-mini-image">
+                <div class="product-mini-info">
+                    <div class="product-mini-title">Cargo Pants</div>
+                    <div class="product-mini-price">$59.99</div>
+                    <div class="product-mini-actions">
+                        <button class="btn btn-mini btn-buy">Buy Now</button>
+                        <button class="btn btn-mini btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-mini-card">
+                <img src="https://images.unsplash.com/photo-1534215754734-18e55d13e346?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Snapback" class="product-mini-image">
+                <div class="product-mini-info">
+                    <div class="product-mini-title">Logo Snapback</div>
+                    <div class="product-mini-price">$29.99</div>
+                    <div class="product-mini-actions">
+                        <button class="btn btn-mini btn-buy">Buy Now</button>
+                        <button class="btn btn-mini btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-mini-card">
+                <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="High Tops" class="product-mini-image">
+                <div class="product-mini-info">
+                    <div class="product-mini-title">High Top Sneakers</div>
+                    <div class="product-mini-price">$89.99</div>
+                    <div class="product-mini-actions">
+                        <button class="btn btn-mini btn-buy">Buy Now</button>
+                        <button class="btn btn-mini btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fas fa-home nav-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-compass nav-icon"></i>
+            <span>Discover</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-plus-circle nav-icon"></i>
+            <span>Create</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-heart nav-icon"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-shopping-bag nav-icon"></i>
+            <span>Cart</span>
+        </a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPESA - Order Confirmed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --medium-gray: #666;
+            --text-light: #888;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--secondary-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .header-icons i {
+            font-size: 20px;
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .header-icons i:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        /* Main Content Styles */
+        .container {
+            max-width: 600px; /* Constrain width for Instagram-like feel */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Confirmation Card */
+        .confirmation-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .confirmation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin: 20px 0;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+        
+        .confirmation-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-message {
+            font-size: 16px;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+        
+        .order-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .order-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .order-detail label {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .order-detail span {
+            color: var(--dark-gray);
+        }
+        
+        .btn {
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn:hover {
+            background-color: #e84118;
+            transform: translateY(-2px);
+        }
+        
+        /* Order Summary */
+        .order-summary {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        
+        .order-item-info {
+            flex: 1;
+        }
+        
+        .order-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .order-item-price {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .summary-total {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 16px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .confirmation-card, .order-summary {
+                padding: 30px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .confirmation-message {
+                font-size: 18px;
+            }
+            
+            .order-detail {
+                font-size: 16px;
+            }
+            
+            .btn {
+                font-size: 16px;
+            }
+            
+            .order-item-title, .order-item-price {
+                font-size: 16px;
+            }
+            
+            .summary-row {
+                font-size: 16px;
+            }
+            
+            .summary-total {
+                font-size: 18px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title, .confirmation-card, .order-summary {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .section-title { animation-delay: 0.1s; }
+        .confirmation-card { animation-delay: 0.2s; }
+        .order-summary { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">SPE<span>SA</span></div>
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h3 class="section-title">Order Confirmed</h3>
+        
+        <!-- Confirmation Card -->
+        <div class="confirmation-card">
+            <i class="fas fa-check-circle confirmation-icon"></i>
+            <h4 class="section-title">Thank You for Your Order!</h4>
+            <p class="confirmation-message">
+                Your order has been successfully placed. You'll receive a confirmation email soon with the details of your purchase.
+            </p>
+            <div class="order-details">
+                <div class="order-detail">
+                    <label>Order Number:</label>
+                    <span>#SPESA123456</span>
+                </div>
+                <div class="order-detail">
+                    <label>Order Date:</label>
+                    <span>June 02, 2025</span>
+                </div>
+                <div class="order-detail">
+                    <label>Estimated Delivery:</label>
+                    <span>June 07, 2025</span>
+                </div>
+                <div class="order-detail">
+                    <label>Shipping Address:</label>
+                    <span>John Doe, 123 Street, New York, NY 10001, USA</span>
+                </div>
+            </div>
+            <button class="btn" onclick="window.location.href='homepage.html'">
+                <i class="fas fa-home"></i> Back to Homepage
+            </button>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h4 class="section-title">Order Summary</h4>
+            <div class="order-item">
+                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Urban Tee" class="order-item-image">
+                <div class="order-item-info">
+                    <div class="order-item-title">Urban Graphic Tee</div>
+                    <div class="order-item-price">$39.99 x 1</div>
+                </div>
+            </div>
+            <div class="order-item">
+                <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="High Tops" class="order-item-image">
+                <div class="order-item-info">
+                    <div class="order-item-title">High Top Sneakers</div>
+                    <div class="order-item-price">$89.99 x 1</div>
+                </div>
+            </div>
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>$129.98</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>$9.99</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total</span>
+                <span>$139.97</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fas fa-home nav-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-compass nav-icon"></i>
+            <span>Discover</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-plus-circle nav-icon"></i>
+            <span>Create</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-heart nav-icon"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-shopping-bag nav-icon"></i>
+            <span>Cart</span>
+        </a>
+    </nav>
+</body>
+</html>
