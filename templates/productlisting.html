@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPESA - Products</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% extends "base.html" %}
+{% block custom_style %}
     <style>
         /* Global Styles */
         :root {
@@ -326,20 +321,9 @@
         .section-title { animation-delay: 0.1s; }
         .product-card { animation-delay: 0.2s; }
     </style>
-</head>
-<body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo">SPE<span>SA</span></div>
-        <div class="header-icons">
-            <i class="fas fa-search"></i>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count">3</span>
-            </div>
-        </div>
-    </header>
-    
+{% endblock custom_style %}
+{% block title %}Products{% endblock title %}
+{% block body %}
     <!-- Main Content -->
     <div class="container">
         <h3 class="section-title">All Products</h3>
@@ -486,29 +470,4 @@
             </div>
         </div>
     </div>
-    
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
-            <i class="fas fa-home nav-icon"></i>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-compass nav-icon"></i>
-            <span>Discover</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-plus-circle nav-icon"></i>
-            <span>Create</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-heart nav-icon"></i>
-            <span>Wishlist</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-shopping-bag nav-icon"></i>
-            <span>Cart</span>
-        </a>
-    </nav>
-</body>
-</html>
+{% endblock body %}

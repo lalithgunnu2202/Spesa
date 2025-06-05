@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPESA - Your Cart</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% extends "base.html" %}
+{% block custom_style %}
     <style>
         /* Global Styles */
         :root {
@@ -249,6 +244,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            text-decoration: none;
         }
         
         .checkout-btn:hover {
@@ -332,19 +328,9 @@
         .cart-item { animation-delay: 0.2s; }
         .cart-summary { animation-delay: 0.3s; }
     </style>
-</head>
-<body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo">SPE<span>SA</span></div>
-        <div class="header-icons">
-            <i class="fas fa-search"></i>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count">3</span>
-            </div>
-        </div>
-    </header>
+{% endblock custom_style %}
+{% block title %}Cart{% endblock title %}
+{% block body %}
     
     <!-- Main Content -->
     <div class="container">
@@ -352,45 +338,26 @@
         
         <!-- Cart Items -->
         <div class="cart-items">
+            {% for cart_item in cart_items %}
             <div class="cart-item">
-                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                <img src="{{cart_item.product.img_url}}" 
                      alt="Urban Tee" class="cart-item-image">
                 <div class="cart-item-info">
-                    <div class="cart-item-title">Urban Graphic Tee</div>
-                    <div class="cart-item-price">$39.99</div>
-                    <div class="cart-item-quantity">
-                        <button class="quantity-btn" onclick="updateQuantity(this, -1)">-</button>
-                        <input type="number" class="quantity-input" value="1" min="1">
-                        <button class="quantity-btn" onclick="updateQuantity(this, 1)">+</button>
-                    </div>
+                    <div class="cart-item-title">{{cart_item.product.name}}</div>
+                    <div class="cart-item-price">${{cart_item.product.price}}</div>
                 </div>
-                <button class="remove-btn">
+                <a href="{% url "delete_from_cart" item_id=forloop.counter %}" class="remove-btn">
                     <i class="fas fa-trash"></i>
-                </button>
+                </a>
             </div>
-            <div class="cart-item">
-                <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                     alt="High Tops" class="cart-item-image">
-                <div class="cart-item-info">
-                    <div class="cart-item-title">High Top Sneakers</div>
-                    <div class="cart-item-price">$89.99</div>
-                    <div class="cart-item-quantity">
-                        <button class="quantity-btn" onclick="updateQuantity(this, -1)">-</button>
-                        <input type="number" class="quantity-input" value="1" min="1">
-                        <button class="quantity-btn" onclick="updateQuantity(this, 1)">+</button>
-                    </div>
-                </div>
-                <button class="remove-btn">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
+            {% endfor %}
         </div>
         
         <!-- Cart Summary -->
         <div class="cart-summary">
             <div class="summary-row">
                 <span>Subtotal</span>
-                <span>$129.98</span>
+                <span>${{sub_total}}</span>
             </div>
             <div class="summary-row">
                 <span>Shipping</span>
@@ -398,36 +365,11 @@
             </div>
             <div class="summary-row summary-total">
                 <span>Total</span>
-                <span>$139.97</span>
+                <span>${{total_price}}</span>
             </div>
             <button class="checkout-btn">
                 <i class="fas fa-bolt"></i> Proceed to Checkout
             </button>
         </div>
     </div>
-    
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item">
-            <i class="fas fa-home nav-icon"></i>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-compass nav-icon"></i>
-            <span>Discover</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-plus-circle nav-icon"></i>
-            <span>Create</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-heart nav-icon"></i>
-            <span>Wishlist</span>
-        </a>
-        <a href="#" class="nav-item active">
-            <i class="fas fa-shopping-bag nav-icon"></i>
-            <span>Cart</span>
-        </a>
-    </nav>
-</body>
-</html>
+{% endblock body %}

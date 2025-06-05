@@ -24,6 +24,7 @@ class Designer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
+    prod_id = models.CharField(max_length=15,default=0)
     disc = models.TextField()
     prod_type = models.ForeignKey('Type',null=True, on_delete=models.SET_NULL)
     GENDER_CHOICES = [
@@ -48,4 +49,4 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     by = models.ForeignKey('Designer',default=1, on_delete=models.CASCADE)
     def  __str__(self):
-        return self.name
+        return self.prod_id

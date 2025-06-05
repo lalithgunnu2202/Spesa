@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPESA - Checkout</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% extends "base.html" %}
+{% block custom_style %}
     <style>
         /* Global Styles */
         :root {
@@ -279,6 +274,7 @@
             justify-content: center;
             gap: 5px;
             width: 100%;
+            text-decoration: none;
         }
         
         .btn-primary {
@@ -402,20 +398,9 @@
         .checkout-card { animation-delay: 0.2s; }
         .order-summary { animation-delay: 0.3s; }
     </style>
-</head>
-<body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo">SPE<span>SA</span></div>
-        <div class="header-icons">
-            <i class="fas fa-search"></i>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count">3</span>
-            </div>
-        </div>
-    </header>
-    
+{% endblock custom_style %}
+{% block title %}Checkout{% endblock title %}
+{% block body %}
     <!-- Main Content -->
     <div class="container">
         <h3 class="section-title">Checkout</h3>
@@ -560,5 +545,4 @@
             });
         });
     </script>
-</body>
-</html>
+    {% endblock body %}

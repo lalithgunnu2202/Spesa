@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from django.contrib.auth import  login , authenticate
+from django.contrib.auth import  login , authenticate ,logout
 from django.contrib.auth.models import  User
 from django.contrib import messages
 
@@ -57,3 +57,8 @@ def reset_view(request):
             return render(request,'reset.html')
     else:
         return render(request,'reset.html')
+    
+def logout_view(request):
+    logout(request)
+    messages.info(request,"Logged Out successfully")
+    return redirect('index')
