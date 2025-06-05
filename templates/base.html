@@ -21,7 +21,9 @@
         <a href="{% url "view_cart" %}">
         <div class="cart-icon">
           <i class="fas fa-shopping-bag"></i>
-          <span class="cart-count">3</span>
+          {% if count > 0 %}
+          <span class="cart-count">{{count}}</span>
+          {% endif %}
         </div>
         </a>
       </div>

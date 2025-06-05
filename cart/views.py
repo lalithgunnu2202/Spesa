@@ -19,11 +19,11 @@ def add_to_cart(request, product_id):
 def view_cart(request):
     cart_items = Cart_item.objects.filter(user=request.user).select_related('product')
     sub_total = sum(item.product.price for item in cart_items)
-    return render(request,'cart.html',{'cart_items':cart_items,'sub_total':sub_total,'total_price':sub_total+9.99})
+    count = Cart_item.objects.filter(user=request.user).count()
+    return render(request,'cart.html',{'cart_items':cart_items,'sub_total':sub_total,'total_price':sub_total+9.99,'count':count})
 
 @login_required
 def delete_from_cart(request, item_id):
-    product = get_object_or_404(Product, id=item_id)
-    cart_item = get_object_or_404(Cart_item, user=request.user, product=product)
+    cart_item = get_object_or_404(Cart_item, id=item_id,user=request.user)
     cart_item.delete()
     return redirect('view_cart')

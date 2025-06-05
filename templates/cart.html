@@ -346,7 +346,7 @@
                     <div class="cart-item-title">{{cart_item.product.name}}</div>
                     <div class="cart-item-price">${{cart_item.product.price}}</div>
                 </div>
-                <a href="{% url "delete_from_cart" item_id=forloop.counter %}" class="remove-btn">
+                <a href="{% url "delete_from_cart" item_id=cart_item.id %}" class="remove-btn">
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
