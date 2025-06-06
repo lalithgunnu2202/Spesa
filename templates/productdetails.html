@@ -431,12 +431,12 @@
                      alt="Premium Streetwear" class="product-image">
             </div>
             <div class="product-info">
-                <h2 class="product-title">Premium Streetwear Hoodie</h2>
-                <div class="product-price">$79.99</div>
+                <h2 class="product-title">{{item.name}}</h2>
+                <div class="product-price">${{item.price}}</div>
                 <p class="product-description">
-                    Elevate your street style with this premium hoodie, crafted from high-quality cotton blend for ultimate comfort and durability. Features bold graphic prints and a relaxed fit, perfect for urban adventures.
+                    {{item.disc}}
                 </p>
-                <span class="designer">By edesign_pro</span>
+                <span class="designer">By {{item.by}}</span>
                 <div class="social-stats">
                     <div class="stat">
                         <i class="far fa-heart"></i>
@@ -460,9 +460,9 @@
                     <button class="btn btn-buy">
                         <i class="fas fa-bolt"></i> Buy Now
                     </button>
-                    <button class="btn btn-cart">
+                    <a style="text-decoration: none;" href="{% url "add_to_cart" item.id %}" class="btn btn-cart">
                         <i class="fas fa-shopping-cart"></i> Add to Cart
-                    </button>
+                    </a>
                     <button class="btn btn-wishlist">
                         <i class="fas fa-heart"></i> Wishlist
                     </button>
@@ -473,54 +473,20 @@
         <!-- Related Products -->
         <h3 class="section-title">Related Products</h3>
         <div class="products-grid">
+            {% for product in products %}
             <div class="product-mini-card">
-                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                <img src="{{product.img_url}}" 
                      alt="Urban Tee" class="product-mini-image">
                 <div class="product-mini-info">
-                    <div class="product-mini-title">Urban Graphic Tee</div>
-                    <div class="product-mini-price">$39.99</div>
+                    <div class="product-mini-title">{{product.name}}</div>
+                    <div class="product-mini-price">${{product.price}}</div>
                     <div class="product-mini-actions">
                         <button class="btn btn-mini btn-buy">Buy Now</button>
-                        <button class="btn btn-mini btn-cart">Add to Cart</button>
+                        <a style="text-decoration: none;" href="{% url "add_to_cart" product.id %}" class="btn btn-mini btn-cart">Add to Cart</a>
                     </div>
                 </div>
             </div>
-            <div class="product-mini-card">
-                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                     alt="Cargo Pants" class="product-mini-image">
-                <div class="product-mini-info">
-                    <div class="product-mini-title">Cargo Pants</div>
-                    <div class="product-mini-price">$59.99</div>
-                    <div class="product-mini-actions">
-                        <button class="btn btn-mini btn-buy">Buy Now</button>
-                        <button class="btn btn-mini btn-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-mini-card">
-                <img src="https://images.unsplash.com/photo-1534215754734-18e55d13e346?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                     alt="Snapback" class="product-mini-image">
-                <div class="product-mini-info">
-                    <div class="product-mini-title">Logo Snapback</div>
-                    <div class="product-mini-price">$29.99</div>
-                    <div class="product-mini-actions">
-                        <button class="btn btn-mini btn-buy">Buy Now</button>
-                        <button class="btn btn-mini btn-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-mini-card">
-                <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                     alt="High Tops" class="product-mini-image">
-                <div class="product-mini-info">
-                    <div class="product-mini-title">High Top Sneakers</div>
-                    <div class="product-mini-price">$89.99</div>
-                    <div class="product-mini-actions">
-                        <button class="btn btn-mini btn-buy">Buy Now</button>
-                        <button class="btn btn-mini btn-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     {% endblock body %}

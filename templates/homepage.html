@@ -503,6 +503,7 @@
       <!-- For You Section (Added new section) -->
       <h3 class="section-title">For You</h3>
       {% for prod in prods %}
+      <a style="text-decoration: none; color: inherit;" href="{% url "product_details" prod.id %}">
         <div class="product-card">
           <span class="product-badge">New</span>
           <div class="product-image-container">
@@ -515,7 +516,7 @@
             <div class="price">${{ prod.price }}</div>
             <div class="social-stats">
               <div class="stat">
-                <i class="far fa-heart"></i>
+                <i class="far fa-heart"></i></a>
                 <span>120 likes</span>
               </div>
               <div class="stat">
