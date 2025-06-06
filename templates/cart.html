@@ -340,11 +340,12 @@
         <div class="cart-items">
             {% for cart_item in cart_items %}
             <div class="cart-item">
+                <a style="text-decoration: none; color: inherit;" href="{% url "product_details" cart_item.product.id %}">
                 <img src="{{cart_item.product.img_url}}" 
                      alt="Urban Tee" class="cart-item-image">
                 <div class="cart-item-info">
                     <div class="cart-item-title">{{cart_item.product.name}}</div>
-                    <div class="cart-item-price">${{cart_item.product.price}}</div>
+                    <div class="cart-item-price">${{cart_item.product.price}}</div></a>
                 </div>
                 <a href="{% url "delete_from_cart" item_id=cart_item.id %}" class="remove-btn">
                     <i class="fas fa-trash"></i>
