@@ -457,7 +457,7 @@
                     </div>
                 </div>
                 <div class="product-actions">
-                    <button class="btn btn-buy">
+                    <a style="text-decoration: none;" href="{% url "checkout_page" item.id %}" class="btn btn-buy">
                         <i class="fas fa-bolt"></i> Buy Now
                     </button>
                     <a style="text-decoration: none;" href="{% url "add_to_cart" item.id %}" class="btn btn-cart">

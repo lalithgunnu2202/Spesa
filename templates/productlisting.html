@@ -330,17 +330,19 @@
         
         <!-- Product Listing -->
         <div class="product-list">
+            {% for prod in prods %}
+            <a style="text-decoration: none; color: inherit;" href="{% url "product_details" prod.id %}">
             <div class="product-card">
                 <span class="product-badge">New</span>
                 <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                    <img src="{{prod.img_url}}" 
                          alt="Urban Tee" class="product-image">
                 </div>
                 <div class="product-info">
-                    <h2 class="product-title">Urban Graphic Tee</h2>
-                    <p class="product-description">Bold graphic tee with a modern streetwear vibe, crafted from premium cotton for all-day comfort.</p>
-                    <span class="designer">By streetstyle_co</span>
-                    <div class="product-price">$39.99</div>
+                    <h2 class="product-title">{{prod.name}}</h2>
+                    <p class="product-description">{{prod.disc}}</p>
+                    <span class="designer">By {{prod.by}}</span>
+                    <div class="product-price">${{prod.price}}</div></a>
                     <div class="social-stats">
                         <div class="stat">
                             <i class="far fa-heart"></i>
@@ -352,122 +354,19 @@
                         </div>
                     </div>
                     <div class="product-actions">
-                        <button class="btn btn-buy">
+                        <a style="text-decoration: none;" href="{% url "checkout_page" prod.id %}" class="btn btn-buy">
                             <i class="fas fa-bolt"></i> Buy Now
-                        </button>
-                        <button class="btn btn-cart">
+                        </a>
+                        <a style="text-decoration: none;" href="{% url "add_to_cart" prod.id %}" class="btn btn-cart">
                             <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
+                        </a>
                         <button class="btn btn-customize">
                             <i class="fas fa-paint-brush"></i> Customize
                         </button>
                     </div>
                 </div>
             </div>
-            
-            <div class="product-card">
-                <span class="product-badge">Trending</span>
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Cargo Pants" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">Cargo Pants</h2>
-                    <p class="product-description">Versatile cargo pants with multiple pockets, designed for both style and functionality.</p>
-                    <span class="designer">By urbanoutfit</span>
-                    <div class="product-price">$59.99</div>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <i class="far fa-heart"></i>
-                            <span>200 likes</span>
-                        </div>
-                        <div class="stat">
-                            <i class="far fa-comment"></i>
-                            <span>30 comments</span>
-                        </div>
-                    </div>
-                    <div class="product-actions">
-                        <button class="btn btn-buy">
-                            <i class="fas fa-bolt"></i> Buy Now
-                        </button>
-                        <button class="btn btn-cart">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
-                        <button class="btn btn-customize">
-                            <i class="fas fa-paint-brush"></i> Customize
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <span class="product-badge">Popular</span>
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1534215754734-18e55d13e346?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Snapback" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">Logo Snapback</h2>
-                    <p class="product-description">Classic snapback cap with embroidered logo, perfect for completing your streetwear look.</p>
-                    <span class="designer">By capculture</span>
-                    <div class="product-price">$29.99</div>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <i class="far fa-heart"></i>
-                            <span>100 likes</span>
-                        </div>
-                        <div class="stat">
-                            <i class="far fa-comment"></i>
-                            <span>15 comments</span>
-                        </div>
-                    </div>
-                    <div class="product-actions">
-                        <button class="btn btn-buy">
-                            <i class="fas fa-bolt"></i> Buy Now
-                        </button>
-                        <button class="btn btn-cart">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
-                        <button class="btn btn-customize">
-                            <i class="fas fa-paint-brush"></i> Customize
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                         alt="High Tops" class="product-image">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">High Top Sneakers</h2>
-                    <p class="product-description">Premium high top sneakers with sleek design and superior cushioning for all-day wear.</p>
-                    <span class="designer">By sneakerhub</span>
-                    <div class="product-price">$89.99</div>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <i class="far fa-heart"></i>
-                            <span>180 likes</span>
-                        </div>
-                        <div class="stat">
-                            <i class="far fa-comment"></i>
-                            <span>22 comments</span>
-                        </div>
-                    </div>
-                    <div class="product-actions">
-                        <button class="btn btn-buy">
-                            <i class="fas fa-bolt"></i> Buy Now
-                        </button>
-                        <button class="btn btn-cart">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
-                        <button class="btn btn-customize">
-                            <i class="fas fa-paint-brush"></i> Customize
-                        </button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock body %}

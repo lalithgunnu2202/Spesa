@@ -298,7 +298,8 @@
             {% for message in messages %}
                 <div class="alert alert-danger mt-2" role="alert">{{message}}</div>
             {% endfor %}
-            <a href="auth.html" class="back-to-login">Back to Login</a>
+            <a href="{% url "login" %}" class="back-to-login">Back to Login</a>
         </div>
     </div>
 {% endblock body %}
+{% block navbar %}{% endblock navbar %}

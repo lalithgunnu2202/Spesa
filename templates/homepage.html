@@ -457,10 +457,11 @@
       <h3 class="section-title">Shop Categories</h3>
       <div class="categories">
         {% for cat in cats %}
+        <a style="color: inherit; text-decoration: none;" href="{% url "specific_view" cat.title %}">
           <div class="category-card">
             <i class="fas fa-{{ cat.code }} category-icon"></i>
             <span class="category-name">{{ cat.title }}</span>
-          </div>
+          </div></a>
         {% endfor %}
       </div>
 
