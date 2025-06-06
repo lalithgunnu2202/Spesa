@@ -368,9 +368,9 @@
                 <span>Total</span>
                 <span>${{total_price}}</span>
             </div>
-            <button class="checkout-btn">
+            <a href="{% url "checkout_cart" %}" class="checkout-btn">
                 <i class="fas fa-bolt"></i> Proceed to Checkout
-            </button>
+            </a>
         </div>
     </div>
 {% endblock body %}
