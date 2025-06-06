@@ -347,42 +347,9 @@
                     <span>John Doe, 123 Street, New York, NY 10001, USA</span>
                 </div>
             </div>
-            <button class="btn" onclick="window.location.href='homepage.html'">
+            <a style="text-decoration: none;" href="{% url "index" %}" class="btn">
                 <i class="fas fa-home"></i> Back to Homepage
-            </button>
-        </div>
-        
-        <!-- Order Summary -->
-        <div class="order-summary">
-            <h4 class="section-title">Order Summary</h4>
-            <div class="order-item">
-                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                     alt="Urban Tee" class="order-item-image">
-                <div class="order-item-info">
-                    <div class="order-item-title">Urban Graphic Tee</div>
-                    <div class="order-item-price">$39.99 x 1</div>
-                </div>
-            </div>
-            <div class="order-item">
-                <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
-                     alt="High Tops" class="order-item-image">
-                <div class="order-item-info">
-                    <div class="order-item-title">High Top Sneakers</div>
-                    <div class="order-item-price">$89.99 x 1</div>
-                </div>
-            </div>
-            <div class="summary-row">
-                <span>Subtotal</span>
-                <span>$129.98</span>
-            </div>
-            <div class="summary-row">
-                <span>Shipping</span>
-                <span>$9.99</span>
-            </div>
-            <div class="summary-row summary-total">
-                <span>Total</span>
-                <span>$139.97</span>
-            </div>
+            </a>
         </div>
     </div>
 
