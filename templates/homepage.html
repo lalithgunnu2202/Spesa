@@ -469,10 +469,11 @@
       <div class="products-grid">
         {% for prod in prods %}
           <div class="product-mini-card">
+            <a style="text-decoration: none; color: inherit;" href="{% url "product_details" prod.id %}">
             <img src="{{ prod.img_url }}" alt="{{ prod.prod_type }}" class="product-mini-image" />
             <div class="product-mini-info">
               <div class="product-mini-title">{{ prod.name }}</div>
-              <div class="product-mini-price">${{ prod.price }}</div>
+              <div class="product-mini-price">${{ prod.price }}</div></a>
               <div class="product-mini-actions">
                 <button class="btn btn-mini btn-buy">Buy Now</button>
                 <a href="{% url 'add_to_cart' prod.id %}" class="btn btn-mini btn-cart">Add to Cart</a>
@@ -487,10 +488,11 @@
       <div class="products-grid">
         {% for prod in prods %}
           <div class="product-mini-card">
+            <a style="text-decoration: none; color: inherit;" href="{% url "product_details" prod.id %}">
             <img src="{{ prod.img_url }}" alt="{{ prod.prod_type }}" class="product-mini-image" />
             <div class="product-mini-info">
               <div class="product-mini-title">{{ prod.name }}</div>
-              <div class="product-mini-price">${{ prod.price }}</div>
+              <div class="product-mini-price">${{ prod.price }}</div></a>
               <div class="product-mini-actions">
                 <button class="btn btn-mini btn-buy">Buy Now</button>
                 <a href="{% url 'add_to_cart' prod.id %}" class="btn btn-mini btn-cart">Add to Cart</a>
@@ -502,7 +504,7 @@
 
       <!-- For You Section (Added new section) -->
       <h3 class="section-title">For You</h3>
-      {% for prod in prods %}
+      {% for prod in eight_prods %}
       <a style="text-decoration: none; color: inherit;" href="{% url "product_details" prod.id %}">
         <div class="product-card">
           <span class="product-badge">New</span>
