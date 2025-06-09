@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPESA - Create Your Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --medium-gray: #666;
+            --text-light: #888;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--secondary-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .header-icons i {
+            font-size: 20px;
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .header-icons i:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        /* Main Content Styles */
+        .container {
+            max-width: 600px; /* Constrain width for Instagram-like feel */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Create Card */
+        .create-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .create-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin: 20px 0;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+        
+        .create-message {
+            font-size: 16px;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(255, 71, 87, 0.3);
+        }
+        
+        .btn {
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e84118;
+            transform: translateY(-2px);
+        }
+        
+        /* Generated Designs Section */
+        .generated-designs {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .generated-designs:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .design-placeholder {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+        
+        .design-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .design-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .design-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1e272e;
+            transform: translateY(-2px);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .create-card, .generated-designs {
+                padding: 30px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .create-message {
+                font-size: 18px;
+            }
+            
+            .form-group textarea {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .btn {
+                font-size: 16px;
+            }
+            
+            .design-placeholder {
+                font-size: 16px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title, .create-card, .generated-designs {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .section-title { animation-delay: 0.1s; }
+        .create-card { animation-delay: 0.2s; }
+        .generated-designs { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">SPE<span>SA</span></div>
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">3</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h3 class="section-title">Create Your Design</h3>
+        
+        <!-- Prompt Input Card -->
+        <div class="create-card">
+            <h4 class="section-title">Design Your Streetwear</h4>
+            <p class="create-message">
+                Describe your dream streetwear design, and let our AI bring it to life!
+            </p>
+            <form id="design-prompt-form">
+                <div class="form-group">
+                    <label for="design-prompt">Your Design Prompt</label>
+                    <textarea id="design-prompt" placeholder="E.g., 'A bold red hoodie with a futuristic neon graphic and graffiti-style text'" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-magic"></i> Generate Design
+                </button>
+            </form>
+        </div>
+        
+        <!-- Generated Designs Section -->
+        <div class="generated-designs">
+            <h4 class="section-title">Generated Designs</h4>
+            <div class="design-placeholder">
+                <p>No designs generated yet. Enter a prompt above to start creating!</p>
+            </div>
+            <!-- Example design item (to be populated dynamically later) -->
+            <!--
+            <div class="design-item">
+                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Generated Design" class="design-image">
+                <div class="design-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item">
+            <i class="fas fa-home nav-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-compass nav-icon"></i>
+            <span>Discover</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-plus-circle nav-icon"></i>
+            <span>Create</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-heart nav-icon"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-shopping-bag nav-icon"></i>
+            <span>Cart</span>
+        </a>
+    </nav>
+</body>
+</html>

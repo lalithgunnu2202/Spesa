@@ -28,4 +28,5 @@ urlpatterns = [
     path('details/',include('details.urls')),
     path('checkout/',include('checkout.urls')),
     path('list_view/',include('listings.urls')),
+    path('create/',include('create.urls')),
 ]

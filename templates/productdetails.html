@@ -448,12 +448,13 @@
                     </div>
                 </div>
                 <div class="size-selection">
-                    <label>Select Size</label>
+                    <label>Size set by Designer</label>
                     <div class="size-options">
-                        <button class="size-btn">S</button>
-                        <button class="size-btn active">M</button>
-                        <button class="size-btn">L</button>
-                        <button class="size-btn">XL</button>
+                        <button class="size-btn {% if size == 'S' %}active{% endif %}">S</button>
+                        <button class="size-btn {% if size == 'M' %}active{% endif %}">M</button>
+                        <button class="size-btn {% if size == 'L' %}active{% endif %}">L</button>
+                        <button class="size-btn {% if size == 'XL' %}active{% endif %}">XL</button>
+                        <button class="size-btn {% if size == 'XXL' %}active{% endif %}">XXL</button>
                     </div>
                 </div>
                 <div class="product-actions">
@@ -475,11 +476,12 @@
         <div class="products-grid">
             {% for product in products %}
             <div class="product-mini-card">
+                <a style="text-decoration: none; color: inherit;" href="{% url "product_details" product.id %}">
                 <img src="{{product.img_url}}" 
                      alt="Urban Tee" class="product-mini-image">
                 <div class="product-mini-info">
                     <div class="product-mini-title">{{product.name}}</div>
-                    <div class="product-mini-price">${{product.price}}</div>
+                    <div class="product-mini-price">${{product.price}}</div></a>
                     <div class="product-mini-actions">
                         <button class="btn btn-mini btn-buy">Buy Now</button>
                         <a style="text-decoration: none;" href="{% url "add_to_cart" product.id %}" class="btn btn-mini btn-cart">Add to Cart</a>
